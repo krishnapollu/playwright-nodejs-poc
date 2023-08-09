@@ -5,13 +5,13 @@ Page Object Model deisgn pattern
 Uses SwagLabs demo app for test execution
 
 ## Clone the project
-    `` git clone https://github.com/krishnapollu/playwright-nodejs-poc.git ``
+`` git clone https://github.com/krishnapollu/playwright-nodejs-poc.git ``
 
 ## Install project
-    `` npm install ``
+`` npm install ``
 
 ## Run tests
 - headless
-    `` npx playwright tests ``
+`` npx playwright tests ``
 - headed
-    `` npx playwright tests --headed ``
+`` npx playwright tests --headed ``
