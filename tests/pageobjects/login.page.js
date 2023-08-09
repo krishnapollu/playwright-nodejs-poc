@@ -1,9 +1,12 @@
 require('dotenv').config();
+const { ReportUtil } = require('../utils/reporting-utils');
 
 exports.LoginPage = class Login {
 
-    constructor(page) {
+    constructor(page, testInfo) {
         this.page = page;
+        this.testInfo = testInfo;
+        this.ru = new ReportUtil(this.page, this.testInfo);
     }
 
     async invoke() {
@@ -15,6 +18,6 @@ exports.LoginPage = class Login {
         await this.page.locator('#user-name').fill(user);
         await this.page.locator('#password').fill(pwd);
         await this.page.locator('#login-button').click();
-
+        await this.ru.takeScreenshot();
     }
 };
