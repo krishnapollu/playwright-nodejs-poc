@@ -19,12 +19,12 @@ Uses SwagLabs demo app for test execution
 ## Reports
 
 #### Default Playwright Reports
-`` npx playwright show-report ``
+- `` npx playwright show-report ``
 
 #### Allure Integration
 
 Install allure reportet for playwright
-`` npm i -D @playwright/test allure-playwright `` 
+- `` npm i -D @playwright/test allure-playwright `` 
 
 Update playwright.config.js
 ```
@@ -62,4 +62,4 @@ await this.ru.takeScreenshot();
 ```
 
 Generate and View Allure report
-`` allure serve ``
+- `` allure serve ``
