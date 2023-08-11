@@ -47,11 +47,11 @@ jobs:
       #   id: deployment
       #   uses: actions/deploy-pages@v1
 
-      name: Deploy to GitHub Pages
-      if: always()
-      uses: crazy-max/ghaction-github-pages@v3
-      with:
-        target_branch: gh-pages
-        build_dir: playwright-report/
-      env:
-        GITHUB_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
+      - name: Deploy to GitHub Pages
+        if: always()
+        uses: crazy-max/ghaction-github-pages@v3
+        with:
+          target_branch: gh-pages
+          build_dir: playwright-report/
+        env:
+          GITHUB_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
