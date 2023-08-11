@@ -25,6 +25,8 @@ jobs:
         run: npx playwright install --with-deps
       - name: Run Playwright tests
         run: npx playwright test
+      - name: Setup Pages
+        uses: actions/configure-pages@v2
       - uses: actions/upload-artifact@v3
         if: always()
         with:
@@ -33,3 +35,6 @@ jobs:
             playwright-report/
             allure-results/
           retention-days: 30
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
