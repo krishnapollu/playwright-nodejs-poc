@@ -28,8 +28,6 @@ jobs:
         run: npx playwright install --with-deps
       - name: Run Playwright tests
         run: npx playwright test
-      - name: Setup Pages
-        uses: actions/configure-pages@v2
       - uses: actions/upload-artifact@v3
         if: always()
         with:
@@ -38,6 +36,22 @@ jobs:
             playwright-report/
             allure-results/
           retention-days: 30
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v1
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v2
+      # - name: Upload artifact
+      #   uses: actions/upload-pages-artifact@v1
+      #   with:
+      #     path: test-merge-report-demo/
+      # - name: Deploy to GitHub Pages
+      #   id: deployment
+      #   uses: actions/deploy-pages@v1
+
+      name: Deploy to GitHub Pages
+      if: always()
+      uses: crazy-max/ghaction-github-pages@v3
+      with:
+        target_branch: gh-pages
+        build_dir: playwright-report/
+      env:
+        GITHUB_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
