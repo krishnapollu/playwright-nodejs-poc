@@ -5,7 +5,24 @@ import { CartPage } from '../pageobjects/cart.page';
 import { CheckoutPage } from '../pageobjects/checkout.page';
 import { ProductPage } from '../pageobjects/product.page';
 
-test('TC01 - Sort Products ', async ({ page }, testInfo) => {
+test.only('TC01 - Invalid Login ', async ({ page }, testInfo) => {
+
+    page.on("console", msg => {
+        console.log(msg.text());
+    });
+
+    const loginPage = new LoginPage(page, testInfo);
+    const homePage = new HomePage(page);
+    const cartPage = new CartPage(page);
+    const chkoutPage = new CheckoutPage(page);
+    const productPage = new ProductPage(page);
+
+    await loginPage.invoke();
+    await loginPage.doLogin("", "");
+
+});
+
+test('TC02 - Sort Products ', async ({ page }, testInfo) => {
 
     const loginPage = new LoginPage(page, testInfo);
     const homePage = new HomePage(page);
@@ -21,7 +38,8 @@ test('TC01 - Sort Products ', async ({ page }, testInfo) => {
 
 });
 
-test('TC02 - Select one Product and then remove', async ({ page }, testInfo) => {
+
+test('TC03 - Select one Product and then remove', async ({ page }, testInfo) => {
 
     const loginPage = new LoginPage(page, testInfo);
     const homePage = new HomePage(page);
@@ -41,7 +59,7 @@ test('TC02 - Select one Product and then remove', async ({ page }, testInfo) => 
 
 });
 
-test('TC03 - Select multiple Product and then remove', async ({ page }, testInfo) => {
+test('TC04 - Select multiple Product and then remove', async ({ page }, testInfo) => {
 
     const loginPage = new LoginPage(page, testInfo);
     const homePage = new HomePage(page);
@@ -73,7 +91,7 @@ test('TC03 - Select multiple Product and then remove', async ({ page }, testInfo
 
 });
 
-test('TC04 - Checkout Cancel Flow', async ({ page }, testInfo) => {
+test('TC05 - Checkout Cancel Flow', async ({ page }, testInfo) => {
 
     const loginPage = new LoginPage(page, testInfo);
     const homePage = new HomePage(page);
@@ -99,7 +117,7 @@ test('TC04 - Checkout Cancel Flow', async ({ page }, testInfo) => {
 
 });
 
-test('TC05 - Single Product Checkout Flow', async ({ page }, testInfo) => {
+test('TC06 - Single Product Checkout Flow', async ({ page }, testInfo) => {
 
     const loginPage = new LoginPage(page, testInfo);
     const homePage = new HomePage(page);
