@@ -5,7 +5,7 @@ import { CartPage } from '../pageobjects/cart.page';
 import { CheckoutPage } from '../pageobjects/checkout.page';
 import { ProductPage } from '../pageobjects/product.page';
 
-test.only('TC01 - Invalid Login ', async ({ page }, testInfo) => {
+test('TC01 - Invalid Login ', async ({ page }, testInfo) => {
 
     page.on("console", msg => {
         console.log(msg.text());
