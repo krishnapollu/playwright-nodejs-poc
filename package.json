@@ -6,11 +6,16 @@
   "directories": {
     "test": "tests"
   },
-  "scripts": {},
+  "scripts": {
+    "test": "playwright test",
+    "api-test": "playwright test --config=api.config.js",
+    "acc-test": "playwright test --config=accessibility.config.js"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@axe-core/playwright": "^4.7.3",
     "@playwright/test": "^1.36.2",
     "allure-playwright": "^2.5.0",
     "playwright-core": "^1.36.2"

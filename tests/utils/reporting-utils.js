@@ -10,4 +10,11 @@ exports.ReportUtil = class ReportUtil {
             contentType: "image/png",
           });
     }
+
+    async attach(accessibilityScanResults, testInfo) {
+        await testInfo.attach('accessibility-scan-results', {
+            body: JSON.stringify(accessibilityScanResults, null, 2),
+            contentType: 'application/json'
+          });
+    }
 };
