@@ -21,6 +21,8 @@ Uses SwagLabs demo app for test execution
 #### Default Playwright Reports
 - `` npx playwright show-report ``
 
+Playwright Reports can be viewed [here](https://krishnapollu.github.io/playwright-nodejs-poc/)
+
 #### Allure Integration
 
 Install allure reportet for playwright
