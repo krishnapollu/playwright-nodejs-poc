@@ -4,3 +4,4 @@ node_modules/
 /playwright/.cache/
 package-lock.json
 /allure-results/
+logs/winston.log
