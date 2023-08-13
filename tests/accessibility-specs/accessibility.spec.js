@@ -1,4 +1,4 @@
-const { test, expect } = require('../../fixtures/myFixture');
+const { test, expect } = require('../../fixtures/myAccFixture');
 import { LoginPage } from '../pageobjects/login.page';
 import { HomePage } from '../pageobjects/home.page';
 import { CartPage } from '../pageobjects/cart.page';
