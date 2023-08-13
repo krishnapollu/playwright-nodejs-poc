@@ -29,7 +29,7 @@ Install allure reportet for playwright
 - `` npm i -D @playwright/test allure-playwright `` 
 
 Update playwright.config.js
-```
+```js
 reporter: [
     ['html'], 
     ['allure-playwright', {
@@ -40,7 +40,7 @@ reporter: [
 ```
 
 Reporting Util
-```
+```js
 exports.ReportUtil = class ReportUtil {
 
     constructor(page, testInfo){
@@ -57,7 +57,7 @@ exports.ReportUtil = class ReportUtil {
 ```
 
 Add attachment from code
-```
+```js
 this.ru = new ReportUtil(this.page, this.testInfo);
 ...
 await this.ru.takeScreenshot();
@@ -73,7 +73,7 @@ An important Playwright feature which enables you to run Accessibility Tests on 
 In this project, I run the accessibility test and attach the report as JSON, instead of failing the test upfront if any violations are present.
 
 #### Fixture
-```
+```js
 // fixtures/myAccFixture.js
 
 //from playwright documentation
@@ -90,7 +90,7 @@ exports.expect = base.expect;
 ```
 
 #### In Reporting Util
-```
+```js
 //attach the accessibility results as JSON in playwright-report
 
 async attach(accessibilityScanResults, testInfo) {
@@ -101,7 +101,7 @@ async attach(accessibilityScanResults, testInfo) {
     }
 ```
 #### Usage
-```
+```js
 // import the fixture and reporting util
 const { test, expect } = require('../../fixtures/myAccFixture');
 const { ReportUtil } = require('../utils/reporting-utils');
@@ -116,7 +116,7 @@ test('Accessibility Test', async ({ page, makeAxeBuilder }, testInfo) => {
 
 ## API Tests
 Playwright lets you write API tests as easily as below
-```
+```js
 test('GET Users', async ({ request }) => {
         const response = await request.get(`${baseUrl}/users/3`);
         expect(response.status()).toBe(200);
@@ -127,7 +127,7 @@ test('GET Users', async ({ request }) => {
 I have integrated Winston node module to implement logging.
 
 #### Logger Util
-```
+```js
 createLogger({
     transports: [
         new transports.Console({
@@ -146,7 +146,7 @@ createLogger({
 ```
 
 #### Usage
-```
+```js
 import { Logger } from '../utils/Logger';
 ...
 let logger;
