@@ -65,3 +65,101 @@ await this.ru.takeScreenshot();
 
 Generate and View Allure report
 - `` allure serve ``
+
+
+## Accessibility Tests
+
+An important Playwright feature which enables you to run Accessibility Tests on your web page and validate the violations.
+In this project, I run the accessibility test and attach the report as JSON, instead of failing the test upfront if any violations are present.
+
+#### Fixture
+```
+// fixtures/myAccFixture.js
+
+//from playwright documentation
+
+exports.test = base.test.extend({
+  makeAxeBuilder: async ({ page }, use, testInfo) => {
+    const makeAxeBuilder = () => new AxeBuilder({ page })
+        .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
+        .exclude('#commonly-reused-element-with-known-issue');
+    await use(makeAxeBuilder);
+  }
+});
+exports.expect = base.expect;
+```
+
+#### In Reporting Util
+```
+//attach the accessibility results as JSON in playwright-report
+
+async attach(accessibilityScanResults, testInfo) {
+        await testInfo.attach('accessibility-scan-results', {
+            body: JSON.stringify(accessibilityScanResults, null, 2),
+            contentType: 'application/json'
+          });
+    }
+```
+#### Usage
+```
+// import the fixture and reporting util
+const { test, expect } = require('../../fixtures/myAccFixture');
+const { ReportUtil } = require('../utils/reporting-utils');
+...
+test('Accessibility Test', async ({ page, makeAxeBuilder }, testInfo) => {
+    let ru = new ReportUtil(page, testInfo);
+    let accessibilityScanResults = {};
+...
+    accessibilityScanResults = await makeAxeBuilder().analyze(); // runs the accessibility test on current page context
+    ru.attach(accessibilityScanResults, testInfo); // attaches the results as JSON in report
+```
+
+## API Tests
+Playwright lets you write API tests as easily as below
+```
+test('GET Users', async ({ request }) => {
+        const response = await request.get(`${baseUrl}/users/3`);
+        expect(response.status()).toBe(200);
+    })
+```
+
+## Custom Logging
+I have integrated Winston node module to implement logging.
+
+#### Logger Util
+```
+createLogger({
+    transports: [
+        new transports.Console({
+            level: 'info',
+           ...
+        }),
+        new transports.File({
+            filename: 'logs/winston.log', 
+            level: 'info',
+            maxsize: 5242880,
+            ... 
+        })
+    ]
+})
+
+```
+
+#### Usage
+```
+import { Logger } from '../utils/Logger';
+...
+let logger;
+...
+test.beforeEach( async ({page}, testInfo) => { // instantiate inside the hook
+        logger = Logger(testInfo.project.name);
+    });
+...
+test('TC01', async ({ page }) => {
+        logger.info('Printing Browser Console logs: ');
+```
+
+#### Output
+```
+2023-08-12T19:49:29.343Z [chromium] info: Printing Browser Console logs: 
+```
