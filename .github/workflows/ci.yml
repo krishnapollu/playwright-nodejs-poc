@@ -2,11 +2,11 @@ name: Playwright Tests
 on:
   workflow_dispatch:
   push:
-    branches: [ ]
+    branches: [main]
     paths-ignore:
       - '**/README.md'
   pull_request:
-    branches: [ ]
+    branches: [main]
     paths-ignore:
       - '**/*.md'
       - '**/ci.yml'
@@ -27,7 +27,7 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run Playwright tests
-        run: npx playwright test
+        run: npx playwright test && true
       - uses: actions/upload-artifact@v3
         if: always()
         with:
