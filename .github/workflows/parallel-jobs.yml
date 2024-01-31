@@ -1,4 +1,4 @@
-name: Playwright Service Tests
+name: Parallel Tests
 on:
   workflow_dispatch:
 permissions:
